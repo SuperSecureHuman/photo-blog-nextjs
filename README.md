@@ -1,10 +1,3 @@
-# 📷 `EXIF` Photo Blog
-
-
-Demo App
--
-https://photos.sambecker.com
-
 Features
 -
 - Built-in auth
