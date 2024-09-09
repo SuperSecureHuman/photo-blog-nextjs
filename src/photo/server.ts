@@ -42,9 +42,12 @@ export const extractImageDataFromBlobPath = async (
 
   const extension = getExtensionFromStorageUrl(url);
 
-  const fileBytes = blobPath
-    ? await fetch(url, { cache: 'no-store' }).then(res => res.arrayBuffer())
+  // #Ark-modified temporary 500 error fix
+  const fileBytes: ArrayBuffer | undefined = blobPath
+    ? await fetch(url, { cache: 'no-store' }).then(res => res.arrayBuffer()).catch((e)=>{console.log(e);return undefined;})
     : undefined;
+
+  // console.log("Blb",blobPath)
 
   let exifData: ExifData | undefined;
   let filmSimulation: FilmSimulation | undefined;
