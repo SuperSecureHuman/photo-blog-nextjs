@@ -24,7 +24,8 @@ export const awsS3Client = () => new S3Client({
   endpoint: AWS_S3_BASE_URL,
 });
 
-const urlForKey = (key?: string) => `${AWS_S3_BASE_URL}/${key}`;
+// #Ark-modified Image URL Logic
+const urlForKey = (key?: string) => `${AWS_S3_BASE_URL}/${AWS_S3_BUCKET}/${key}`;
 
 export const isUrlFromAwsS3 = (url?: string) =>
   AWS_S3_BASE_URL && url?.startsWith(AWS_S3_BASE_URL);

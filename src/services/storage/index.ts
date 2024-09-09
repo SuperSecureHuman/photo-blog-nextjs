@@ -205,6 +205,7 @@ const getStorageUrlsForPrefix = async (prefix = '') => {
       .catch(() => []));
   }
   if (HAS_AWS_S3_STORAGE) {
+    //console.log(await awsS3List(prefix));
     urls.push(...await awsS3List(prefix)
       .catch(() => []));
   }

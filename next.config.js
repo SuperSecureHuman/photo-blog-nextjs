@@ -9,14 +9,17 @@ const HOSTNAME_VERCEL_BLOB = VERCEL_BLOB_STORE_ID
 const HOSTNAME_CLOUDFLARE_R2 =
   process.env.NEXT_PUBLIC_CLOUDFLARE_R2_PUBLIC_DOMAIN;
 
-const HOSTNAME_AWS_S3 = "192.168.0.104:19000";
+// #Ark-modified Remote Pattern Logic 
+  
+const HOSTNAME_AWS_S3 = "192.168.0.104";
 
+const HOSTNAME_LOCAL_S3 = "127.0.0.1";
 
-const createRemotePattern = (hostname) => hostname
+const createRemotePattern = (hostname, port) => hostname
   ? {
     protocol: 'http',
     hostname,
-    port: '',
+    port: port || '',
     pathname: '/**',
   }
   : [];
@@ -28,7 +31,8 @@ const nextConfig = {
     remotePatterns: []
       .concat(createRemotePattern(HOSTNAME_VERCEL_BLOB))
       .concat(createRemotePattern(HOSTNAME_CLOUDFLARE_R2))
-      .concat(createRemotePattern(HOSTNAME_AWS_S3)),
+      .concat(createRemotePattern(HOSTNAME_AWS_S3, '19000'))
+      .concat(createRemotePattern(HOSTNAME_LOCAL_S3, '9000')),
     minimumCacheTTL: 31536000,
   },
 };
